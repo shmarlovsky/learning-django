@@ -1,0 +1,25 @@
+{% extends "blog/base_blog.html" %}
+
+{% load bootstrap3 %}
+{% block title %}
+    Registration
+{% endblock title %}
+
+{% block main_info %}
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">Register
+            </button>
+            <button type="reset" class="btn">Clear
+            </button>
+        {% endbuttons %}
+    </form>
+
+{% endblock main_info %}
+
+{% block sidebar %}
+    <p align="right"><a href="{% url 'blog:index' %}"> Cancel</a> </p>
+{% endblock %}

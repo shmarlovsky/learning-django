@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %} Shmarlovsky {% endblock %}
+
+{% block menu %}
+    <li><a href="{% url 'blog:index' %}">Blog</a></li>
+    <li><a href="{% url 'about' %}">About</a></li>
+{% endblock menu %}
+
+{%block content %}
+<p align=center> <a href="{% url 'blog:index' %}"> BLOG </a></p>
+<h4 align=center> This site was created for learning web development </h4>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% if articles.count > 0 %}
+
+    {% for article in articles %}
+    <p><a href="{% url 'blog:article_detail' article.id %}"> {{ article.headline }} </a></p>
+    {% endfor %}
+
+{% else %}
+    <p> No results </p>
+{% endif %}

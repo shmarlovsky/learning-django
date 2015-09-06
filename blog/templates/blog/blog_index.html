@@ -1,0 +1,62 @@
+{% extends "blog/base_blog.html" %}
+{% load bootstrap3 %}
+{% block main_info %}
+    {% if latest_articles_list %}
+        <div class="row clearfix">
+                {% for article in latest_articles_list %}
+                    <div class="well">
+                        <a id="articles_list" href="{% url 'blog:article_detail' article.id %}">{{ article.headline }}</a>
+                    </div>
+                {% endfor %}
+        </div>
+    {% elif user.is_authenticated %}
+        <h4 align="center">No articles.</h4>
+    {% else %}
+        <h4 align="center">To see articles please log in.</h4>
+    {% endif %}
+{%  endblock %}
+<!--
+<div class="col-md-4">
+    <form class="form-horizontal" id="sign_in_form">
+      <div class="form-group">
+        <label for="inputEmail" class="col-sm-4 control-label">Username</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="inputEmail" placeholder="Username">
+      </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword" class="col-sm-4 control-label">Password</label>
+    <div class="col-sm-8">
+      <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+  </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-offset-4 col-sm-8">
+      <button type="submit" class="btn btn-default">Sign in</button>
+      <button type="submit" class="btn btn-default">Register</button>
+  </div>
+</div>
+</form>
+
+</div>
+-->
+{% block sidebar %}
+
+    <div class="sidebar">
+        {% if user.is_authenticated %}
+            <p> Hello, <a href="{% url 'blog:user_profile' %}"> {{ user.username }} </a></p>
+            <a href="{% url 'blog:new_article' %}">Create Article</a> <br>
+            <a href="{% url 'blog:logout' %}"> Log out </a> <br>
+            <br>
+        {% else %}
+            <a href="{% url 'blog:login' %}"> Log in </a> <br>
+            <a href="{% url 'blog:user_register' %}"> Register </a>
+            <br> <br>
+            {% csrf_token %}
+            {% bootstrap_field search_form.search show_label=False %}
+            <p id="search-results"> </p>
+            </div>
+        {% endif %}
+    </div>
+{%  endblock %}
+

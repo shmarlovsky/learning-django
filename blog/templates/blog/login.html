@@ -1,0 +1,24 @@
+{% extends "blog/base_blog.html" %}
+{% load bootstrap3 %}
+{% block title %}
+    Blog: Login
+{% endblock title %}
+
+{% block main_info %}
+    <div class="login_form" align="left">
+        <form action="" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">Log in
+                </button>
+                <button type="reset" class="btn">Clear
+                </button>
+            {% endbuttons %}
+        </form>
+    </div>
+{% endblock  %}
+
+{% block sidebar %}
+    <p align="right"><a href="{% url 'blog:index' %}"> Cancel</a> </p>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'blog/base_blog.html' %}
+{% load bootstrap3 %}
+
+{% block title %}
+    Blog: my articles
+{% endblock %}
+
+{% block main_info %}
+
+    {% if user_articles_list %}
+        <div class="row clearfix">
+
+                {% for article in user_articles_list %}
+                    <div class="well">
+                      <p>  <a href="{% url 'blog:article_update' article.id %}">{{ article.headline }}</a>
+                      <a class="delete_link" href="{% url 'blog:article_delete' article.id %}"> Delete </a> </p>
+                    </div>
+
+                {% endfor %}
+
+        </div>
+    {% else %}
+        <h4 align="center">No articles.</h4>
+    {% endif %}
+
+{% endblock %}
+
+{% block sidebar %}
+    <p align="right"><a href="{% url 'blog:user_profile' %}"> Cancel</a> </p>
+{% endblock %}

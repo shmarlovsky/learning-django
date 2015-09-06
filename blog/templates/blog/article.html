@@ -1,0 +1,69 @@
+{% extends "blog/blog_index.html" %}
+{% load bootstrap3 %}
+{% block title %}
+    Blog: {{ article.headline }}
+{% endblock %}
+
+{% block main_info %}
+    <h1 class="article_headline">{{ article.headline }}</h1>
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% endif %}
+    <br>
+    <p id="article_content">
+        {{article.content|safe}}
+    </p>
+    <br>
+    <p> By {{ article.author }} </p>
+    <p> {{ article.pub_date }}</p>
+
+    <form action="{% url 'blog:article_like' article.id %}">
+        {% if user.is_authenticated %}
+        {% buttons %}
+            {{ article.likes }} people like it
+            <button type="submit" class="btn">
+                {% bootstrap_icon "heart" %}
+            </button>
+        {% endbuttons %}
+    {% endif %}
+    </form>
+
+    <br>
+
+    {% for comment in article.comment_set.all %}
+        <ul>
+            <li>
+                <form action="{% url 'blog:comment_like' comment.id %}">
+                        <p id="comment_author"> {{ comment.author }}: </p>
+
+                        {% buttons %}
+                            <Strong> {{ comment.content }} </Strong> | {{ comment.likes }} like it
+                            {% if user.is_authenticated %}
+                        <button type="submit" class="btn" >{% bootstrap_icon "heart" %}</button>
+                            {%  endif %}
+                        {% endbuttons %}
+
+
+
+                </form>
+
+                <p>  </p>
+            </li>
+        </ul>
+
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+    <form action="{% url 'blog:comment_add' article.id %}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form comment_form %}
+        {% buttons %}
+        <button type="submit" class="btn btn-primary">Add comment
+            </button>
+        {% endbuttons %}
+
+    </form>
+    {% endif %}
+
+
+{% endblock  %}

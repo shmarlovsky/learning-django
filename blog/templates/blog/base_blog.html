@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}
+    Blog
+{% endblock %}
+
+{% block menu %}
+    <li><a href="{% url 'blog:index' %}"> Blog </a></li>
+    {% if user.username == "admin" %}
+        <li><a href="/admin"> Admin </a></li>
+    {% endif %}
+    <li><a href="{% url 'about' %}"> About</a>
+{% endblock menu %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-8">
+            {% block main_info %}
+            {% endblock %}
+        </div>
+
+        <div class="col-md-4">
+            {% block sidebar %}
+            {% endblock %}
+        </div>
+    </div> <!-- row -->
+
+{%  endblock %}

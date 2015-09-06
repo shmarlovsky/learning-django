@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Blog: About
+{% endblock %}
+
+{% block menu %}
+    <li><a href="{% url 'index' %}">Home</a></li>
+    <li><a href="{% url 'blog:index' %}">Blog</a></li>
+{% endblock menu %}
+
+{%block content %}
+    <div id="about_info">
+    Created with Django 1.8.2 <br> <br>
+    Contact info: kiril@shmarlovski.by </div>
+
+{% endblock %}
